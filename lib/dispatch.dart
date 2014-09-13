@@ -17,12 +17,13 @@ abstract class Store{
 
 abstract class StoreHouse{
   final MapDecorator storehouse = MapDecorator.create();
-  final SingleStore store;
+  final Store store;
 
   StoreHouse(this.store);
 
   Future delegateAdd(m);
   Future delegateRemove(m);
+  bool hasTag(n);
 
   dynamic get tree => this.storehouse.core.values;
 
@@ -36,7 +37,6 @@ abstract class SingleStore extends Store{
     this.dispatchFilter = Middleware.create((m){
       this.dispatch.dispatch(m);
     });
-    this.dispatchFilter.ware((d,next,end) => next());
     this.attach(d);
   }
 
@@ -160,6 +160,8 @@ class DispatchWatcher{
     this.dispatch.dispatch(m);
   }
 
+  void pause() => this.streams.pause();
+  void resume() => this.streams.resume();
   void listen(Function n) => this.streams.on(n);
   void listenOnce(Function n) => this.streams.onOnce(n);
   void unlisten(Function n) => this.streams.off(n);
@@ -262,6 +264,8 @@ class Dispatch{
     return DispatchWatcher.create(this,message);
   }
 
+  void pause() => this.dispatchs.pause();
+  void resume() => this.dispatchs.resume();
   void listen(Function n) => this.dispatchs.on(n);
   void listenOnce(Function n) => this.dispatchs.onOnce(n);
   void unlisten(Function n) => this.dispatchs.off(n);
