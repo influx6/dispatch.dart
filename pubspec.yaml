@@ -1,5 +1,5 @@
 name: dispatch
-version: 0.0.9
+version: 0.1.2
 author: Alexander Adeniyin Ewetumo <trinoxf@gmail.com>
 description: building on the streamble to provide a flux pattern dispatcher
 homepage: http://influx.github.com/dispatch.dart

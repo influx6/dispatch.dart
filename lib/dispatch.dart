@@ -254,7 +254,7 @@ class Dispatch{
   bool get isActive => this.active.on();
 
   void dispatch(Map m){
-    if(!this.isActive) return null;
+    if(!this.isActive || Valids.notExist(m)) return null;
     if(m.containsKey('message') && !Valids.isString(m['message'])) return null;
     this.dispatchs.emit(m);
   }
